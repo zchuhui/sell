@@ -10,14 +10,31 @@
     			<span class="text">{{ seller.supports[0].description }}</span>
     		</div>
     	</div>
-    	<div v-if="seller.supports" class="support-count">
+    	<div v-if="seller.supports" class="support-count" @click="showDetail()">
     		<span>{{ seller.supports.length }} 个</span>
-    		<span class="arrow"></span>
+    		<span class="icon-keyboard_arrow_right"></span>
     	</div>
     </div>
-    <div class="banner-wrap">
+    <div class="banner-wrap" @click="showDetail()">
     	<span class="icon"></span>
     	<span class="bulletin">{{ seller.bulletin }}</span>
+    	<span class=" icon-keyboard_arrow_right"></span>
+    </div>
+    <div class="detail-wrap" v-show="detailShow">
+    	<div class="detail-main clearfix">
+    		<div class="detail-content">
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<span class="bulletin">{{ seller.bulletin }}</span>
+    		</div>
+    	</div>
+    	<div class="detail-close" @click="detailShow = !detailShow"><span class="icon-close"></span></div>
     </div>
   </div>
 </template>
@@ -30,6 +47,16 @@ export default {
   		type:Object
   	}
   },
+  data(){
+  	return{
+  		detailShow:false
+  	}
+  },
+  methods:{
+  	showDetail:function(){
+  		this.detailShow = true
+  	}
+  },
   created(){
   	this.classMap = ['decrease','discount','gurantee','invoice','special'];
   }
@@ -38,6 +65,8 @@ export default {
 
 <style lang="stylus">
 @import '../../common/styles/mixin.styl';
+@import '../../common/styles/base.styl';
+@import '../../common/icon.css';
 
 .header{
 	background: #333;
@@ -121,7 +150,7 @@ export default {
 			top:60px;
 			right:10px;
 			display:inline-block;
-			width:30px;
+			width:40px;
 			height:14px;
 			padding:7px;
 			font-size:10px;
@@ -133,6 +162,7 @@ export default {
 	}
 	
 	.banner-wrap{
+		position:relative;
 		width:100%;
 		height:28px;
 		line-height:28px; 
@@ -159,8 +189,44 @@ export default {
 			white-space: nowrap;
 			
 		}
+		.icon-keyboard_arrow_right{
+			position:absolute;
+			top:8px;
+			right:15px;
+		}
+		
 	}
 	
+	.detail-wrap{
+		position:fixed;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		z-index:100;
+		overflow:auto;
+		background:rgba(7,17,27,0.8);
+		
+		.detail-main{
+			min-height:100%;
+			
+			.detail-content{
+				margin-top:64px;
+				padding-bottom:64px;
+				
+			}
+		}
+		
+		.detail-close{
+			position:relative;
+			width:32px;
+			height:32px;
+			margin:-64px auto 0 auto;
+			clear:both;
+			font-size:32px;
+		}
+		
+	}
 	
 	
 }

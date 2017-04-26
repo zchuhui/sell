@@ -57,7 +57,7 @@ export default {
   width:100%;
   height:40px;
   line-height: 40px;
-  border-1px(red);
+  border-1px(rgba(7,17,27,0.1));
 
   .tab-item
     flex: 1;
@@ -67,6 +67,6 @@ export default {
       display: block;
 
     .active
-       color:red;
+       color:rgba(240,20,20,1);
 
 </style>
