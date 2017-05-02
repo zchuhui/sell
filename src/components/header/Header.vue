@@ -23,15 +23,9 @@
     <div class="detail-wrap" v-show="detailShow">
     	<div class="detail-main clearfix">
     		<div class="detail-content">
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
-    			<span class="bulletin">{{ seller.bulletin }}</span>
+    			<h1 class="name">{{ seller.name }}</h1>
+    			<star :size="36" :score="5"></star>
+
     		</div>
     	</div>
     	<div class="detail-close" @click="detailShow = !detailShow"><span class="icon-close"></span></div>
@@ -41,26 +35,31 @@
 
 
 <script>
-export default {
-  props: {
-  	seller:{
-  		type:Object
-  	}
-  },
-  data(){
-  	return{
-  		detailShow:false
-  	}
-  },
-  methods:{
-  	showDetail:function(){
-  		this.detailShow = true
-  	}
-  },
-  created(){
-  	this.classMap = ['decrease','discount','gurantee','invoice','special'];
-  }
-}
+ 	import star from 'components/star/star';
+
+	export default {
+	  props: {
+	  	seller:{
+	  		type:Object
+	  	}
+	  },
+	  data(){
+	  	return{
+	  		detailShow:false
+	  	}
+	  },
+	  methods:{
+	  	showDetail:function(){
+	  		this.detailShow = true
+	  	}
+	  },
+	  created(){
+	  	this.classMap = ['decrease','discount','gurantee','invoice','special'];
+	  },
+	  components:{
+	  	star:star
+	  }
+	}
 </script>
 
 <style lang="stylus">
@@ -208,12 +207,24 @@ export default {
 		background:rgba(7,17,27,0.8);
 		
 		.detail-main{
+			width:100%;
 			min-height:100%;
 			
 			.detail-content{
 				margin-top:64px;
 				padding-bottom:64px;
 				
+				.name{
+					font-size:16px;
+					font-weight:700px;
+					line-height:16px;
+					text-align:center;
+					
+				}
+				.star{
+					text-align:center;
+					margin-top:16px;
+				}
 			}
 		}
 		
