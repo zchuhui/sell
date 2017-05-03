@@ -20,16 +20,38 @@
     	<span class="bulletin">{{ seller.bulletin }}</span>
     	<span class=" icon-keyboard_arrow_right"></span>
     </div>
-    <div class="detail-wrap" v-show="detailShow">
-    	<div class="detail-main clearfix">
-    		<div class="detail-content">
-    			<h1 class="name">{{ seller.name }}</h1>
-    			<star :size="36" :score="5"></star>
-
-    		</div>
-    	</div>
-    	<div class="detail-close" @click="detailShow = !detailShow"><span class="icon-close"></span></div>
-    </div>
+    <transition name="slide-fade">
+	    <div class="detail-wrap" v-show="detailShow">
+	    	<div class="detail-main clearfix">
+	    		<div class="detail-content">
+	    			<h1 class="name">{{ seller.name }}</h1>
+	    			<div class="star-wrap">
+	    				<star :size="36" :score="seller.score"></star>
+	    			</div>
+	    			<div class="title">
+	    				<div class="line"></div>
+	    				<div class="text">优惠信息</div>
+	    				<div class="line"></div>
+	    			</div>
+	    			<ul v-if="seller.supports" class="supports">
+	    				<li v-for="(item,i) in seller.supports" class="support-item">
+	    					<span :class="classMap[item.type]" class="icon"></span>
+	    					<span>{{ item.description }}</span>
+	    				</li>
+	    			</ul>
+	    			<div class="title">
+	    				<div class="line"></div>
+	    				<div class="text">商家公告</div>
+	    				<div class="line"></div>
+	    			</div>
+	    			<div class="bulletin">
+	    				{{ seller.bulletin }}
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="detail-close" @click="detailShow = !detailShow"><span class="icon-close"></span></div>
+	    </div>
+    </transition>
   </div>
 </template>
 
@@ -65,7 +87,7 @@
 <style lang="stylus">
 @import '../../common/styles/mixin.styl';
 @import '../../common/styles/base.styl';
-@import '../../common/icon.css';
+@import '../../common/styles/icon.styl';
 
 .header{
 	background: #333;
@@ -195,7 +217,20 @@
 		}
 		
 	}
-	
+
+	/* 可以设置不同的进入和离开动画 */
+	/* 设置持续时间和动画函数 */
+	.slide-fade-enter-active {
+	  transition: all .3s ease;
+	}
+	.slide-fade-leave-active {
+	  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	}
+	.slide-fade-enter, .slide-fade-leave-active {
+	  transform: translateX(10px);
+	  opacity: 0;
+	}
+			
 	.detail-wrap{
 		position:fixed;
 		top:0;
@@ -221,9 +256,73 @@
 					text-align:center;
 					
 				}
-				.star{
+				.star-wrap{
 					text-align:center;
 					margin-top:16px;
+				}
+				.title{
+					display:flex;
+					width:80%;
+					margin:24px auto;
+					
+					.line{
+						flex:1;
+						position:relative;
+						border-bottom:1px solid rgba(225,225,225,0.2);
+						top:-6px;
+					}
+					.text{
+						flex:1;
+						font-size:14px;
+						text-align:center;
+						font-weight:700;
+					}
+				}
+				.supports{
+					width:80%;
+					margin:0 auto;
+					
+					.support-item{
+						font-size:12px;
+						line-height:16px;
+						padding:0 12px;
+						margin-bottom:12px;
+						
+						&:last-child{
+							margin-bottom:0;
+						}
+						.icon{
+							display:inline-block;
+							width:16px;
+							height:16px;
+							background-size:16px 16px;
+							vertical-align:top;
+							margin-right:6px;
+							
+							&.decrease{
+								bg-image("decrease_1");
+							}
+							&.discount{
+								bg-image("discount_1");
+							}
+							&.gurantee{
+								bg-image("guarantee_1");
+							}
+							&.invoice{
+								bg-image("invoice_1");
+							}
+							&.special{
+								bg-image("special_1");
+							}
+						}
+					}
+				}
+				.bulletin{
+					width:80%;
+					margin:0 auto;
+					padding:0 12px;
+					font-size:12px;
+					line-height:24px;
 				}
 			}
 		}

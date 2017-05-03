@@ -35,7 +35,7 @@
 					result.push(CLS_ON);
 				}
 				if(hasDecimal){
-					result.push(CLS_HALFS);
+					result.push(CLS_HALF);
 				}
 				while(result.length < LENGTH){
 					result.push(CLS_OFF);
