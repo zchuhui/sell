@@ -85,9 +85,7 @@
 </script>
 
 <style lang="stylus">
-@import '../../common/styles/mixin.styl';
-@import '../../common/styles/base.styl';
-@import '../../common/styles/icon.styl';
+@import "../../common/styles/mixin.styl"
 
 .header{
 	background: #333;
@@ -171,19 +169,25 @@
 			top:60px;
 			right:10px;
 			display:inline-block;
-			width:40px;
-			height:14px;
-			padding:7px;
+			height:10px;
+			line-height:10px;
+			padding:7px 8px;
 			font-size:10px;
 			color:#fff;
 			border-radius:40px;
 			background:rgba(0,0,0,0.2);
 			
+			.icon-keyboard_arrow_right{
+				vertical-align: middle;
+			}
 		}
 	}
 	
 	.banner-wrap{
 		position:relative;
+		display: -webkit-flex; /* Safari */
+		display:flex;
+		align-items:ceter;
 		width:100%;
 		height:28px;
 		line-height:28px; 
@@ -205,6 +209,8 @@
 		.bulletin{
 			display:inline-block;
 			width:80%;
+			vertical-align:middle;
+			
 			overflow: hidden;
 			text-overflow:ellipsis;
 			white-space: nowrap;
@@ -224,7 +230,7 @@
 	  transition: all .3s ease;
 	}
 	.slide-fade-leave-active {
-	  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 	}
 	.slide-fade-enter, .slide-fade-leave-active {
 	  transform: translateX(10px);

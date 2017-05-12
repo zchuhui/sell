@@ -9,6 +9,9 @@ import Goods from './components/goods/Goods.vue'
 import Ratings from './components/ratings/Ratings.vue'
 import Sellers from './components/seller/Seller.vue'
 
+// 统一引入css样式
+import 'common/styles/index.styl'
+
 // 全局注册
 Vue.use(VueRouter)
 Vue.use(VueResource)

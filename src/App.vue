@@ -12,7 +12,7 @@
         <router-link to="/sellers">商家</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
@@ -31,15 +31,15 @@ export default {
   },
   created(){
     this.$http.get('/api/seller').then((response) => {
+      
+      response = response.body;
 
-      response = response.body
-
-      if (response.result === ERR_OK) {
-          this.seller = response.data
-          console.log(this.seller.data);
+      if (response.result == ERR_OK) {
+          this.seller = response.data;
+          //console.log(this.seller);
       }
       else{
-        console.log("xx");
+        console.log("error:no sellers");
       }
     })
   },
