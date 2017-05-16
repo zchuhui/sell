@@ -36,7 +36,7 @@
       		</li>
         </ul>
     </div>
-    <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+    <shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -63,8 +63,8 @@
 	  		}
 	  	},
 	  	computed:{
+        // 计算scrollY停留在哪个区间
 		  	currentIndex(){
-		  		// 计算scrollY停留在哪个区间
 		  		for(let i=0,len = this.listHeight.length; i<len; i++){
 		  			let height1 = this.listHeight[i];
 		  			let height2 = this.listHeight[i+1];
@@ -73,7 +73,20 @@
 		  			}
 		  		}
 		  		return 0;
-		  	}
+		  	},
+        // 计算选中的商品
+        selectFoods(){
+          let foods = [];
+          this.goods.forEach((good) => {
+            good.foods.forEach((food) => {
+              if (food.count > 0) {
+                foods.push(food);
+              }
+            })
+          });
+          return foods;
+        }
+
 	  	},
 	  	created(){
 
@@ -142,6 +155,7 @@
 
 		  	}
 		},
+    // 组件
 		components:{
 			shopcart,
       cartControl

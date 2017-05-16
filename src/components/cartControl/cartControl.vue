@@ -1,6 +1,8 @@
 <template>
 	<div class="cart-control">
-		<div class="cart-decrease icon-remove_circle_outline" v-show="food.count > 0" @click="decreaseCart"></div>
+		<transition name="slide-fade">
+			<div class="cart-decrease icon-remove_circle_outline" v-show="food.count > 0" @click="decreaseCart"></div>
+		</transition>
 		<div class="cart-count" v-show="food.count > 0">{{ food.count }}</div>
 		<div class="cart-add icon-add_circle" @click="addCart($event)"></div>
 	</div>
@@ -70,5 +72,18 @@
 			font-size:24px;
 			color:rgba(0,160,220,1);
 		}
+		
+		/* 设置持续时间和动画函数 */
+		.slide-fade-enter-active {
+		  	transition: all .3s ease-in-out;
+		}
+		
+		.slide-fade-enter, .slide-fade-leave-active {
+		  	padding-left: 10px;
+		  	opacity: 0;
+		  	transform:translate3D(20px,0,0);
+		}
+		
+		
 	}
 </style>
